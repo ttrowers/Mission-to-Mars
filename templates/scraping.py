@@ -1,10 +1,9 @@
-# Import Splinter, BeautifulSoup, and Pandas
+
+# Import Splinter and BeautifulSoup
 from splinter import Browser
 from bs4 import BeautifulSoup as soup
-import pandas as pd
-import datetime as dt
+import pandas as pd 
 from webdriver_manager.chrome import ChromeDriverManager
-
 
 def scrape_all():
     # Initiate headless driver for deployment
@@ -19,6 +18,7 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "hemispheres":hemispheres(browser),
         "last_modified": dt.datetime.now()
     }
 
@@ -96,6 +96,14 @@ def mars_facts():
 
     # Convert dataframe into HTML format, add bootstrap
     return df.to_html(classes="table table-striped")
+
+def hemispheres(browser):
+
+    url = 'https://marshemispheres.com/'
+
+    browser.visit(url)
+
+    hemisphere_image_urls = []
 
 if __name__ == "__main__":
 
